@@ -269,7 +269,7 @@ checksum = "1ab52be62400ca80aa00285d25253d7f7c437b7375c4de678f5405d3afe82ca5"
 
 [[package]]
 name = "otool"
-version = "0.1.2-alpha.0"
+version = "0.1.2"
 dependencies = [
  "bitflags",
  "byteorder",
