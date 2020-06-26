@@ -10,6 +10,10 @@
   <a href="https://github.com/19h/otool">
     Github
   </a>
+  -
+  <a href="https://github.com/19h/otool-rs/releases">
+    Releases (prebuilt binaries)
+  </a>
 </div>
 
 <br />
@@ -18,6 +22,10 @@
 $ cargo install otool
 $ otool -a binary.o
 ```
+
+#### Trivia
+
+<h5>otool is based on rust-macho, more specifically on its <a href="https://github.com/flier/rust-macho/blob/94bafced83cad602f37e31cc387c021bd2db47c2/examples/otool.rs">otool example</a>. This is a distribution (with minor changes).</h5>
 
 #### Usage
 
