@@ -18,13 +18,17 @@ use byteorder::ReadBytesExt;
 use failure::Error;
 use memmap::Mmap;
 use structopt::StructOpt;
+use clap::{crate_version, crate_authors, crate_name, crate_description};
 
 use mach_object::*;
 
-const APP_VERSION: &'static str = "0.1.1";
-
 #[derive(Debug, StructOpt)]
-#[structopt(name = "otool", about = "object file displaying tool")]
+#[structopt(
+    name = crate_name!(),
+    about = crate_description!(),
+    author = crate_authors!(),
+    version = crate_version!(),
+)]
 struct Opt {
     /// Specifies the architecture
     #[structopt(long = "arch", parse(try_from_str = parse_cpu_type))]
@@ -107,7 +111,7 @@ struct Opt {
     print_version: bool,
 
     /// The object files
-    #[structopt(parse(from_os_str))]
+    #[structopt(required = true, parse(from_os_str))]
     files: Vec<PathBuf>,
 }
 
@@ -128,21 +132,12 @@ fn parse_section(s: &str) -> Result<(String, Option<String>), Error> {
 fn main() {
     pretty_env_logger::init();
 
-    let args: Vec<String> = env::args().collect();
-    let program = Path::new(args[0].as_str()).file_name().unwrap().to_str().unwrap();
-
     let opt = Opt::from_args();
 
     if opt.print_version {
-        println!("{} version {}", program, APP_VERSION);
+        println!("{} {}", crate_name!(), crate_version!());
 
         exit(0);
-    }
-
-    if opt.files.is_empty() {
-        println!("at least one file must be specified");
-
-        exit(-1);
     }
 
     let mut processor = FileProcessor { opt, w: stdout() };
@@ -453,7 +448,7 @@ impl<T: Write> FileProcessor<T> {
     ) -> Result<(), Error> {
         if self.print_fat_header {
             let header = FatHeader {
-                magic: magic,
+                magic,
                 archs: files.iter().map(|&(ref arch, _)| arch.clone()).collect(),
             };
 
