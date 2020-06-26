@@ -1,6 +1,6 @@
 [package]
 name = "otool"
-version = "0.1.2"
+version = "0.1.3-alpha.0"
 authors = ["Flier Lu <flier.lu@gmail.com>", "Kenan Sulayman <kenan@sig.dev>"]
 description = "The otool command displays specified parts of object files or libraries. (Mach-O File Format)"
 documentation = "https://github.com/19h/otool-rs"
