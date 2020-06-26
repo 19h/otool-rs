@@ -7,6 +7,7 @@ documentation = "https://github.com/19h/otool-rs"
 homepage = "https://github.com/19h/otool-rs"
 repository = "https://github.com/19h/otool-rs"
 license = "Apache-2.0"
+readme = "readme.md"
 edition = "2018"
 
 [dependencies]
@@ -26,3 +27,19 @@ hexplay = "0.2.1"
 walkdir = "2.3.1"
 mach_object = "0.1.14"
 clap = "2.33.1"
+
+[[bin]]
+bench = false
+path = "src/main.rs"
+name = "otool"
+
+[profile]
+
+[profile.release]
+codegen-units = 1
+debug = false
+debug-assertions = false
+lto = true
+opt-level = 3
+panic = "abort"
+rpath = false
